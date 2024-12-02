@@ -32,7 +32,7 @@ const FormPerson: React.FC = () => {
       newErrors.age = "Mínimo de idade deve ser maior que 18";
     }
     if (!formDataPerson.city) {
-      newErrors.cidade = "Cidade não pode ser vazia";
+      newErrors.city = "Cidade não pode ser vazia";
     }
 
     if (formDataPerson.document.length < 14) {

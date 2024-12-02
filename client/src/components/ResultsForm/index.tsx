@@ -55,7 +55,7 @@ const ResultsForm: FunctionComponent<ResultsFormProps> = ({ type }) => {
             </label>
             <label className="text-gray-500 text-sm">
               Renda Mensal:{" "}
-              <span className="text-black">R${formDataPerson.revenue}</span>
+              <span className="text-black">R${formDataPerson.income}</span>
             </label>
           </form>
         </div>

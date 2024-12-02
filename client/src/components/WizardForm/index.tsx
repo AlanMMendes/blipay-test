@@ -15,8 +15,6 @@ const WizardForm: React.FC = () => {
     (state: any) => state.wizard
   );
   const dispatch = useDispatch<AppDispatch>();
-  console.log(formDataPerson);
-  console.log(formDataCompany);
 
   const handlePrev = () => {
     dispatch(prevStep());
@@ -70,7 +68,7 @@ const WizardForm: React.FC = () => {
     } else {
       resultsData(formDataCompany);
     }
-  }
+  };
 
   const renderProgressCircles = () => {
     const totalSteps = 3;
@@ -100,18 +98,9 @@ const WizardForm: React.FC = () => {
     return <div className="flex justify-center gap-2">{circles} </div>;
   };
 
-  const API_URL = "http://localhost:5000/credit-score/person";
+  const API_URL = `http://localhost:5000/credit-score/${type}`;
 
-  const resultsData = async (data: {
-    nome: string;
-    cpf: string;
-    rendaMensal: string;
-    idade: string;
-    cidade: string;
-    razaoSocial: string;
-    cnpj: string;
-    faturamentoMensal: string;
-  }) => {
+  const resultsData = async (data: any) => {
     try {
       const response: any = await axios.post(API_URL, data);
       dispatch(nextStep());
