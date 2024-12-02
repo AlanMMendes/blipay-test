@@ -4,30 +4,38 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 interface WizardState {
   currentStep: number;
   maxSteps: number;
-  formData: {
-    nome: string;
-    cpf: string;
-    rendaMensal: string;
-    idade: string;
-    cidade: string;
-    razaoSocial: string;
-    cnpj: string;
-    faturamentoMensal: string;
+  status: "pending" | "success" | "denied";
+  formDataPerson: {
+    income: string;
+    city: string;
+    name: string;
+    age: string;
+    document: string;
+  };
+  formDataCompany: {
+    revenue: string;
+    name: string;
+    city: string;
+    document: string;
   };
 }
 
 const initialState: WizardState = {
   currentStep: 1,
   maxSteps: 3,
-  formData: {
-    nome: "",
-    cpf: "",
-    rendaMensal: "",
-    idade: "",
-    cidade: "",
-    razaoSocial: "",
-    cnpj: "",
-    faturamentoMensal: "",
+  status: "pending",
+  formDataPerson: {
+    income: "",
+    city: "",
+    name: "",
+    age: "",
+    document: "",
+  },
+  formDataCompany: {
+    revenue: "",
+    name: "",
+    city: "",
+    document: "",
   },
 };
 
@@ -41,25 +49,47 @@ const wizardSlice = createSlice({
     prevStep: (state) => {
       state.currentStep -= 1;
     },
-    setFormData: (
+    setStatus: (
       state,
       action: PayloadAction<{
-        nome: string;
-        cpf: string;
-        rendaMensal: string;
-        idade: string;
-        cidade: string;
-        razaoSocial: string;
-        cnpj: string;
-        faturamentoMensal: string;
+        status: "pending" | "success" | "denied";
       }>
     ) => {
-      state.formData = action.payload;
+      state.status = action.payload.status;
+    },
+    setFormDataPerson: (
+      state,
+      action: PayloadAction<{
+        income: string;
+        city: string;
+        name: string;
+        age: string;
+        document: string;
+      }>
+    ) => {
+      state.formDataPerson = action.payload;
+    },
+    setFormDataCompany: (
+      state,
+      action: PayloadAction<{
+        revenue: string;
+        name: string;
+        city: string;
+        document: string;
+      }>
+    ) => {
+      state.formDataCompany = action.payload;
     },
     resetWizard: () => initialState,
   },
 });
 
-export const { nextStep, prevStep, setFormData, resetWizard } =
-  wizardSlice.actions;
+export const {
+  nextStep,
+  prevStep,
+  setFormDataPerson,
+  setFormDataCompany,
+  resetWizard,
+  setStatus,
+} = wizardSlice.actions;
 export default wizardSlice.reducer;
