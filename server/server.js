@@ -27,9 +27,11 @@ const writeDatabase = (data) => {
   }
 };
 
-app.get("/api/users", (req, res) => {
-  const users = readDatabase().users;
-  res.json(users);
+app.get("/credit-score/list", (req, res) => {
+  const persons = readDb().persons;
+  const companies = readDb().companies;
+
+  res.json({ persons, companies });
 });
 
 app.post("/credit-score/results", (req, res) => {

@@ -1,3 +1,4 @@
+import axios from "axios";
 import React from "react";
 import { FaArrowLeft } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
@@ -96,19 +97,20 @@ const WizardForm: React.FC = () => {
 
   const handleData = async (data: any) => {
     try {
-      const response: any = await fetch(
+      const response = await axios.post(
         "http://localhost:5000/credit-score/results",
+        data,
         {
-          method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify(data),
         }
       );
-      const dataResponse = await response.json();
+
+      const dataResponse = response.data;
 
       dispatch(nextStep());
+
       if (
         dataResponse?.statusCompany?.status === "APPROVED" ||
         dataResponse?.statusPerson?.status === "APPROVED"
@@ -164,8 +166,7 @@ const WizardForm: React.FC = () => {
             <button
               className="border bg-[#2F1A4B] flex text-white justify-center items-center max-w-64 max-h-12 border-[#2F1A4B] rounded-full p-3 transition-all duration-200"
               onClick={() => {
-                dispatch(resetWizard());
-                navigate("/");
+                navigate("/credit-score/list");
               }}
               aria-label="Resultados"
             >

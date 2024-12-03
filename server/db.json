@@ -537,6 +537,81 @@
           "max_amount": 500
         }
       }
+    },
+    {
+      "person": {
+        "income": "12333",
+        "city": "Santa Bárbara D` Oeste",
+        "name": "Alan Mazeto Mendes",
+        "age": "20",
+        "document": "88888888888888"
+      },
+      "credit_result": {
+        "status": {
+          "status": "APPROVED",
+          "max_amount": 500
+        }
+      }
+    },
+    {
+      "person": {
+        "income": "12333",
+        "city": "Santa Bárbara D` Oeste",
+        "name": "Alan Mazeto Mendes",
+        "age": "20",
+        "document": "88888888888888"
+      },
+      "credit_result": {
+        "status": {
+          "status": "APPROVED",
+          "max_amount": 500
+        }
+      }
+    },
+    {
+      "person": {
+        "income": "12333",
+        "city": "Santa Bárbara D` Oeste",
+        "name": "Alan Mazeto Mendes",
+        "age": "20",
+        "document": "88888888888888"
+      },
+      "credit_result": {
+        "status": {
+          "status": "APPROVED",
+          "max_amount": 500
+        }
+      }
+    },
+    {
+      "person": {
+        "income": "12333",
+        "city": "Santa Bárbara D` Oeste",
+        "name": "Alan Mazeto Mendes",
+        "age": "20",
+        "document": "88888888888888"
+      },
+      "credit_result": {
+        "status": {
+          "status": "APPROVED",
+          "max_amount": 500
+        }
+      }
+    },
+    {
+      "person": {
+        "income": "12333",
+        "city": "Santa Bárbara D` Oeste",
+        "name": "Alan Mazeto Mendes",
+        "age": "20",
+        "document": "88888888888888"
+      },
+      "credit_result": {
+        "status": {
+          "status": "APPROVED",
+          "max_amount": 500
+        }
+      }
     }
   ],
   "companies": [
@@ -687,6 +762,20 @@
       "credit_result": {
         "status": {
           "status": "DENIED"
+        }
+      }
+    },
+    {
+      "company": {
+        "revenue": "12333",
+        "name": "teste limitada",
+        "city": "Santa Bárbara D` Oeste",
+        "document": "88888888888888"
+      },
+      "credit_result": {
+        "status": {
+          "status": "APPROVED",
+          "max_amount": 1000
         }
       }
     },
