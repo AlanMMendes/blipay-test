@@ -11,15 +11,13 @@ import { store } from "./store/store.ts";
 createRoot(document.getElementById("root")!).render(
   <Provider store={store}>
     <StrictMode>
-      <div className="flex flex-col">
-        <BrowserRouter>
-          <Navbar />
-          <Routes>
-            <Route path="/" element={<MainPage />} />
-            <Route path="/credit-score/:type" element={<FormPage />} />
-          </Routes>
-        </BrowserRouter>
-      </div>
+      <BrowserRouter>
+        <Navbar />
+        <Routes>
+          <Route path="/" element={<MainPage />} />
+          <Route path="/credit-score/:type" element={<FormPage />} />
+        </Routes>
+      </BrowserRouter>
     </StrictMode>
   </Provider>
 );

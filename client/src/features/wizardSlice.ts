@@ -1,6 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-// Definindo os estados de cada etapa
 interface WizardState {
   currentStep: number;
   maxSteps: number;

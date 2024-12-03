@@ -14,14 +14,9 @@ app.use(
 
 const dbPath = "./db.json";
 
-const readDatabase = () => {
-  try {
-    const data = fs.readFileSync(dbPath);
-    return JSON.parse(data);
-  } catch (err) {
-    console.error("Erro ao ler o arquivo:", err);
-    return { users: [] };
-  }
+const readDb = () => {
+  const data = fs.readFileSync(dbPath, "utf8");
+  return JSON.parse(data);
 };
 
 const writeDatabase = (data) => {
@@ -37,42 +32,67 @@ app.get("/api/users", (req, res) => {
   res.json(users);
 });
 
-app.post("/credit-score/:type", (req, res) => {
-  const { type } = req.params;
+app.post("/credit-score/results", (req, res) => {
+  try {
+    const { persons, companies } = req.body;
 
-  if (type === "person") {
-    const { income } = req.body;
-    if (!income) {
-      return res.status(400).json({ error: "Renda Mensal é obrigatória" });
-    }
-    if (income < 500) {
-      res.status(201).json({
-        status: "DENIED",
-      });
-    } else {
-      res.status(201).json({
-        status: "APPROVED",
-        max_amount: 10000,
-      });
-    }
-  }
+    const dbData = readDb();
 
-  if (type === "company") {
-    const { revenue } = req.body;
-    if (!revenue) {
-      return res.status(400).json({ error: "Faturamento é obrigatória" });
+    if (persons && Array.isArray(persons)) {
+      persons.forEach((person) => {
+        const statusPerson =
+          person.person.income >= 500
+            ? {
+                status: "APPROVED",
+                max_amount: 500,
+              }
+            : {
+                status: "DENIED",
+              };
+
+        if (!person.credit_result) {
+          person.credit_result = {};
+        }
+
+        person.credit_result.status = statusPerson;
+        dbData.persons.push(person);
+
+        return res.status(200).json({
+          statusPerson,
+        });
+      });
+    }
+    if (companies && Array.isArray(companies)) {
+      companies.forEach((company) => {
+        const statusCompany =
+          company.company.revenue >= 500
+            ? {
+                status: "APPROVED",
+                max_amount: 1000,
+              }
+            : {
+                status: "DENIED",
+              };
+
+        if (!company.credit_result) {
+          company.credit_result = {};
+        }
+
+        company.credit_result.status = statusCompany;
+
+        dbData.companies.push(company);
+        return res.status(200).json({
+          statusCompany,
+        });
+      });
     }
 
-    if (revenue < 500) {
-      res.status(201).json({
-        status: "DENIED",
-      });
-    } else {
-      res.status(201).json({
-        status: "APPROVED",
-        max_amount: 10000,
-      });
-    }
+    writeDatabase(dbData);
+  } catch (err) {
+    console.error(err);
+    return res
+      .status(500)
+      .json({ message: "Erro ao salvar dados", error: err.message });
   }
 });
 

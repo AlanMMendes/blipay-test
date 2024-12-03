@@ -58,89 +58,110 @@ const FormPerson: React.FC = () => {
   };
 
   return (
-    <div className="flex h-auto justify-center items-center flex-col w-full max-w-[480px] rounded-lg ">
+    <section className="flex flex-col min-h-full justify-between items-center max-w-[480px] p-4">
       <form
         onSubmit={handleSubmit}
-        className="h-auto flex flex-col justify-start items-center"
+        className="h-full flex flex-col justify-start items-center gap-4"
+        aria-labelledby="form-title"
       >
-        <div className="flex flex-col gap-4 h-auto rounded-lg p-4 justify-center items-center ">
-          <h1 className="font-medium text-lg text-[#2F1A4B]">
-            Insira as suas informações
+        <header className="h-auto">
+          <h1 id="form-title" className="font-medium text-lg text-[#2F1A4B]">
+            Insira as suas informações:
           </h1>
+        </header>
 
-          <div className="flex flex-col gap-4">
-            <label className="text-[#2F1A4B] text-sm">Razão Social</label>
-            <CustomInput
-              type="text"
-              placeholder={errors.name || "Nome"}
-              name="name"
-              value={formDataPerson.name}
-              errorName={errors.name}
-              onChange={handleChange}
-            />
-          </div>
+        <fieldset className="flex flex-col gap-4 w-full justify-start items-start h-full">
+          <div className="h-auto flex flex-col gap-4 w-full">
+            <div className="flex flex-col gap-4">
+              <label htmlFor="name" className="text-[#2F1A4B] text-sm">
+                Razão Social
+              </label>
+              <CustomInput
+                type="text"
+                id="name"
+                placeholder={errors.name || "Nome"}
+                name="name"
+                value={formDataPerson.name}
+                errorName={errors.name}
+                onChange={handleChange}
+              />
+            </div>
 
-          <div className="flex flex-col gap-4">
-            <label className="text-[#2F1A4B] text-sm">Cidade</label>
-            <CustomInput
-              type="text"
-              placeholder={errors.city || "Cidade"}
-              name="city"
-              value={formDataPerson.city}
-              errorName={errors.city}
-              onChange={handleChange}
-            />
-          </div>
-          <div className="flex flex-col gap-4">
-            <label className="text-[#2F1A4B] text-sm">Cidade</label>
-            <CustomInput
-              type="text"
-              placeholder={errors.age || "Idade"}
-              name="age"
-              value={formDataPerson.age}
-              errorName={errors.age}
-              onChange={handleChange}
-            />
-          </div>
+            <div className="flex flex-col gap-4">
+              <label htmlFor="city" className="text-[#2F1A4B] text-sm">
+                Cidade
+              </label>
+              <CustomInput
+                type="text"
+                id="city"
+                placeholder={errors.city || "Cidade"}
+                name="city"
+                value={formDataPerson.city}
+                errorName={errors.city}
+                onChange={handleChange}
+              />
+            </div>
 
-          <div className="flex flex-col gap-4">
-            <label className="text-[#2F1A4B] text-sm">CNPJ</label>
-            <CustomInput
-              type="text"
-              placeholder={errors.document || "CPF"}
-              name="document"
-              value={formDataPerson.document}
-              errorName={errors.document}
-              onChange={handleChange}
-            />
-          </div>
+            <div className="flex flex-col gap-4">
+              <label htmlFor="age" className="text-[#2F1A4B] text-sm">
+                Idade
+              </label>
+              <CustomInput
+                type="text"
+                id="age"
+                placeholder={errors.age || "Idade"}
+                name="age"
+                value={formDataPerson.age}
+                errorName={errors.age}
+                onChange={handleChange}
+              />
+            </div>
 
-          <div className="flex flex-col gap-4">
-            <label className="text-[#2F1A4B] text-sm">
-              Seu faturamento mensal
-            </label>
-            <CustomInput
-              type="number"
-              placeholder={errors.income || "Renda Mensal"}
-              name="income"
-              value={formDataPerson.income}
-              errorName={errors.income}
-              onChange={handleChange}
-            />
-          </div>
-        </div>
+            <div className="flex flex-col gap-4">
+              <label htmlFor="document" className="text-[#2F1A4B] text-sm">
+                CNPJ
+              </label>
+              <CustomInput
+                type="text"
+                id="document"
+                placeholder={errors.document || "CPF"}
+                name="document"
+                value={formDataPerson.document}
+                errorName={errors.document}
+                onChange={handleChange}
+              />
+            </div>
 
-        <div className="relative justify-center h-auto items-center flex flex-row gap-4 px-2 py-2 ">
+            <div className="flex flex-col gap-4">
+              <label htmlFor="income" className="text-[#2F1A4B] text-sm">
+                Seu faturamento mensal
+              </label>
+              <CustomInput
+                type="number"
+                id="income"
+                placeholder={errors.income || "Renda Mensal"}
+                name="income"
+                value={formDataPerson.income}
+                errorName={errors.income}
+                onChange={handleChange}
+              />
+            </div>
+          </div>
+          <legend className="sr-only">Informações do Usuário</legend>
+        </fieldset>
+
+        <footer className="h-auto justify-center items-end flex flex-row bottom-0">
           <button
-            className="border bg-[#2F1A4B] bottom-0 max-w-64 flex text-white justify-center items-center max-h-12 border-[#2F1A4B] rounded-full p-3 transition-all duration-200"
+            className="border bg-[#2F1A4B] max-w-64 flex text-white justify-center items-center max-h-12 border-[#2F1A4B] rounded-full p-3 transition-all duration-200"
             type="submit"
+            aria-label="Ir para a próxima etapa"
           >
             <span className="text-white">Próximo</span>
             <FaArrowRight className="w-5 h-5 text-white" />
           </button>
-        </div>
+        </footer>
       </form>
-    </div>
+    </section>
   );
 };
 

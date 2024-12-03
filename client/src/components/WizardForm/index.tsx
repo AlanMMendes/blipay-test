@@ -1,16 +1,22 @@
-import axios from "axios";
 import React from "react";
 import { FaArrowLeft } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router";
-import { nextStep, prevStep, setStatus } from "../../features/wizardSlice";
+import { useNavigate, useParams } from "react-router";
+import {
+  nextStep,
+  prevStep,
+  resetWizard,
+  setStatus,
+} from "../../features/wizardSlice";
 import { AppDispatch } from "../../store/store";
+import CheckForm from "../CheckForm";
 import FormCompany from "../FormCompany";
 import FormPerson from "../FormPerson";
-import ResultsForm from "../ResultsForm";
+import ResultForm from "../ResultForm";
 
 const WizardForm: React.FC = () => {
   const { type } = useParams();
+  const navigate = useNavigate();
   const { currentStep, status, formDataPerson, formDataCompany } = useSelector(
     (state: any) => state.wizard
   );
@@ -30,33 +36,9 @@ const WizardForm: React.FC = () => {
           </div>
         );
       case 2:
-        return <ResultsForm type={type?.toString()} />;
+        return <CheckForm type={type?.toString()} />;
       case 3:
-        return (
-          <div>
-            {status === "pending" && (
-              <div className="w-full h-[480px] flex justify-center items-center flex-col">
-                <h1 className="text-lg text-gray-800">
-                  Aguarde um momento, o resultado será exibido em breve.
-                </h1>
-              </div>
-            )}
-            {status === "denied" && (
-              <div className="w-full h-[480px] flex justify-center items-center flex-col">
-                <h1 className="text-lg text-gray-800">
-                  Desculpe, você não foi aprovado.
-                </h1>
-              </div>
-            )}
-            {status === "success" && (
-              <div className="w-full h-[480px] flex justify-center items-center flex-col">
-                <h1 className="text-lg text-gray-800">
-                  Obrigado por sua contribuição, seu credito foi aprovado!
-                </h1>
-              </div>
-            )}
-          </div>
-        );
+        return <ResultForm status={status} />;
       default:
         return <h2>Passo Desconhecido</h2>;
     }
@@ -64,9 +46,21 @@ const WizardForm: React.FC = () => {
 
   const handleClick = () => {
     if (type === "person") {
-      resultsData(formDataPerson);
+      handleData({
+        persons: [
+          {
+            person: formDataPerson,
+          },
+        ],
+      });
     } else {
-      resultsData(formDataCompany);
+      handleData({
+        companies: [
+          {
+            company: formDataCompany,
+          },
+        ],
+      });
     }
   };
 
@@ -88,59 +82,99 @@ const WizardForm: React.FC = () => {
               : isPrevious
               ? "bg-[#442370]"
               : isCompleted
-              ? "bg-gray-300"
+              ? "bg-[#442370]"
               : "bg-gray-500"
           } transition-all`}
         ></div>
       );
     }
 
-    return <div className="flex justify-center gap-2">{circles} </div>;
+    return (
+      <div className="flex justify-center gap-2 h-auto py-3">{circles} </div>
+    );
   };
 
-  const API_URL = `http://localhost:5000/credit-score/${type}`;
-
-  const resultsData = async (data: any) => {
+  const handleData = async (data: any) => {
     try {
-      const response: any = await axios.post(API_URL, data);
+      const response: any = await fetch(
+        "http://localhost:5000/credit-score/results",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
+        }
+      );
+      const dataResponse = await response.json();
+
       dispatch(nextStep());
-      if (response.data.status === "APPROVED") {
+      if (
+        dataResponse?.statusCompany?.status === "APPROVED" ||
+        dataResponse?.statusPerson?.status === "APPROVED"
+      ) {
         dispatch(setStatus({ status: "success" }));
       } else {
         dispatch(setStatus({ status: "denied" }));
       }
-    } catch (error) {
-      console.error("Erro na requisição POST:", error);
-      return null;
+    } catch (err) {
+      console.error("Erro na requisição:", err);
     }
   };
 
   return (
-    <div className="h-full w-full flex flex-col gap-2">
-      <div className="flex justify-center relative items-center h-auto mt-5">
-        {renderProgressCircles()}
-      </div>
+    <section className="flex flex-col gap-4 px-2 justify-start items-center">
+      {renderProgressCircles()}
       {renderStep()}
-      <div className="justify-center h-auto items-center flex flex-row gap-4 px-2 py-2 absolute bottom-0">
-        {currentStep > 1 && (
+
+      <nav className="flex flex-row gap-4 justify-center items-center h-auto">
+        {currentStep > 1 && currentStep !== 3 && (
           <button
-            className="border bg-white bottom-0 max-w-64 flex justify-between items-center max-h-12 border-[#2F1A4B] dark:text-black text-black rounded-full p-3 transition-all duration-200"
+            className="border bg-white flex justify-between items-center max-w-64 max-h-12 border-[#2F1A4B] dark:text-black text-black rounded-full p-3 transition-all duration-200"
             onClick={handlePrev}
+            aria-label="Voltar"
           >
             <FaArrowLeft className="w-5 h-5 text-[#2F1A4B]" />
             <span>Voltar</span>
           </button>
         )}
+
         {currentStep < 3 && currentStep !== 1 && (
           <button
-            className="border bg-[#2F1A4B] bottom-0 max-w-64 flex text-white justify-center items-center max-h-12 border-[#2F1A4B] rounded-full p-3 transition-all duration-200"
+            className="border bg-[#2F1A4B] flex text-white justify-center items-center max-w-64 max-h-12 border-[#2F1A4B] rounded-full p-3 transition-all duration-200"
             onClick={handleClick}
+            aria-label="Finalizar"
           >
             Finalizar
           </button>
         )}
-      </div>
-    </div>
+
+        {currentStep === 3 && (
+          <div className="flex flex-row gap-4 justify-center items-center">
+            <button
+              className="border bg-[#2F1A4B] flex text-white justify-center items-center max-w-64 max-h-12 border-[#2F1A4B] rounded-full p-3 transition-all duration-200"
+              onClick={() => {
+                dispatch(resetWizard());
+                navigate("/");
+              }}
+              aria-label="Refazer"
+            >
+              Refazer
+            </button>
+            <button
+              className="border bg-[#2F1A4B] flex text-white justify-center items-center max-w-64 max-h-12 border-[#2F1A4B] rounded-full p-3 transition-all duration-200"
+              onClick={() => {
+                dispatch(resetWizard());
+                navigate("/");
+              }}
+              aria-label="Resultados"
+            >
+              Resultados
+            </button>
+          </div>
+        )}
+      </nav>
+    </section>
   );
 };
 
