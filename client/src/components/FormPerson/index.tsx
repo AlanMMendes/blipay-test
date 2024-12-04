@@ -36,8 +36,8 @@ const FormPerson: React.FC = () => {
       newErrors.city = "Cidade não pode ser vazia";
     }
 
-    if (formDataPerson.document.length < 14) {
-      newErrors.document = "CNPJ deve ter no mínimo 14 caracteres";
+    if (formDataPerson.document.length < 11) {
+      newErrors.document = "CPF deve ter no mínimo 11 caracteres";
     }
 
     if (formDataPerson.income <= 0) {

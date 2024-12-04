@@ -1,0 +1,19 @@
+{
+  "persons": [],
+  "companies": [
+    {
+      "company": {
+        "revenue": "12333",
+        "name": "Alan Mazeto Mendes",
+        "city": "Santa Bárbara D` Oeste",
+        "document": "88888888888888"
+      },
+      "credit_result": {
+        "status": {
+          "status": "APPROVED",
+          "max_amount": 1000
+        }
+      }
+    }
+  ]
+}

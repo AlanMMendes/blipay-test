@@ -26,7 +26,7 @@ const CustomButton: FunctionComponent<CustomButtonProps> = ({
       onClick={onClick}
       className={`${
         customClass ? customClass : ""
-      } w-64 hover:border-[#2F1A4B] border-2 max-h-16 justify-center items-center flex dark:text-black text-black rounded-lg p-4 transition-all duration-200`}
+      } w-auto min-w-32 hover:border-[#2F1A4B] border-2 max-h-16 justify-center items-center flex dark:text-black text-black rounded-lg p-4 transition-all duration-200`}
       aria-label={text}
       type={type || "button"}
     >

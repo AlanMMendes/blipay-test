@@ -3,6 +3,7 @@ import { FaArrowRight } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { nextStep, setFormDataCompany } from "../../features/wizardSlice";
 import { AppDispatch } from "../../store/store";
+import CustomButton from "../CustomButton";
 import CustomInput from "../CustomInput";
 
 const FormCompany = () => {
@@ -127,14 +128,9 @@ const FormCompany = () => {
         </fieldset>
 
         <footer className="h-auto justify-center items-center flex flex-row py-2">
-          <button
-            className="border bg-[#2F1A4B] max-w-64 flex text-white justify-center items-center max-h-12 border-[#2F1A4B] rounded-full p-3 transition-all duration-200"
-            type="submit"
-            aria-label="Enviar as informações"
-          >
-            <span className="text-white">Próximo</span>
-            <FaArrowRight className="w-5 h-5 text-white" />
-          </button>
+          <CustomButton text="Próximo" type={"submit"}>
+            <FaArrowRight className="w-5 h-5 text-[#2F1A4B]" />
+          </CustomButton>
         </footer>
       </form>
     </section>
