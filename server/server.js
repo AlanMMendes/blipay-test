@@ -84,7 +84,7 @@ app.post("/credit-score/results", (req, res) => {
           company.credit_result = {};
         }
 
-        company.credit_result.status = statusCompany;
+        company.credit_result = statusCompany;
 
         dbData.companies.push(company);
         return res.status(200).json({

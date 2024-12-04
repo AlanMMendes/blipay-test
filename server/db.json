@@ -1,18 +1,42 @@
 {
-  "persons": [],
+  "persons": [
+    {
+      "person": {
+        "income": 1000,
+        "city": "Winterfell",
+        "name": "John Snow",
+        "age": 30,
+        "document": "00000000000"
+      },
+      "credit_result": {
+        "max_amount": 2000,
+        "status": "APPROVED"
+      }
+    },
+    {
+      "person": {
+        "income": 1000,
+        "city": "Middle-Earth",
+        "name": "Gandalf o Cinzento",
+        "age": 30,
+        "document": "00000000001"
+      },
+      "credit_result": {
+        "status": "DENIED"
+      }
+    }
+  ],
   "companies": [
     {
       "company": {
-        "revenue": "12333",
-        "name": "Alan Mazeto Mendes",
-        "city": "Santa Bárbara D` Oeste",
-        "document": "88888888888888"
+        "revenue": 10000,
+        "city": "Ibitinga",
+        "name": "Borracharia dois irmãos",
+        "document": "00000000000000"
       },
       "credit_result": {
-        "status": {
-          "status": "APPROVED",
-          "max_amount": 1000
-        }
+        "max_amount": 2000,
+        "status": "APPROVED"
       }
     }
   ]
