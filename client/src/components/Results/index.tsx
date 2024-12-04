@@ -26,7 +26,7 @@ const ResultList = () => {
   }, []);
 
   return (
-    <div className="container mx-auto max-w-[1280px] w-full h-auto flex flex-col">
+    <div className="container mx-auto w-full h-auto  flex flex-col">
       <div className="flex justify-center border-b h-auto px-2">
         <button
           onClick={() => handleTabClick("person")}

@@ -27,28 +27,14 @@
     },
     {
       "person": {
-        "income": "2666",
+        "income": "1",
         "city": "Santa Bárbara D` Oeste",
         "name": "Alan Mazeto Mendes",
         "age": "20",
         "document": "88888888888888"
       },
       "credit_result": {
-        "status": "APPROVED",
-        "max_amount": 500
-      }
-    },
-    {
-      "person": {
-        "income": "2666",
-        "city": "Santa Bárbara D` Oeste",
-        "name": "Alan Mazeto Mendes",
-        "age": "20",
-        "document": "88888888888888"
-      },
-      "credit_result": {
-        "status": "APPROVED",
-        "max_amount": 500
+        "status": "DENIED"
       }
     }
   ],
@@ -63,18 +49,6 @@
       "credit_result": {
         "max_amount": 2000,
         "status": "APPROVED"
-      }
-    },
-    {
-      "company": {
-        "revenue": "12333",
-        "name": "Alan Mazeto Mendes",
-        "city": "Santa Bárbara D` Oeste",
-        "document": "88888888888888"
-      },
-      "credit_result": {
-        "status": "APPROVED",
-        "max_amount": 1000
       }
     }
   ]
