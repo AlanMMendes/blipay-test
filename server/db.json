@@ -24,18 +24,6 @@
       "credit_result": {
         "status": "DENIED"
       }
-    },
-    {
-      "person": {
-        "income": "1",
-        "city": "Santa Bárbara D` Oeste",
-        "name": "Alan Mazeto Mendes",
-        "age": "20",
-        "document": "88888888888888"
-      },
-      "credit_result": {
-        "status": "DENIED"
-      }
     }
   ],
   "companies": [
