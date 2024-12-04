@@ -15,8 +15,12 @@ app.use(
 const dbPath = "./db.json";
 
 const readDb = () => {
-  const data = fs.readFileSync(dbPath, "utf8");
-  return JSON.parse(data);
+  try {
+    const data = fs.readFileSync(dbPath, "utf8");
+    return JSON.parse(data);
+  } catch (err) {
+    return { persons: [], companies: [] };
+  }
 };
 
 const writeDatabase = (data) => {

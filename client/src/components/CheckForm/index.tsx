@@ -1,19 +1,20 @@
 import { FunctionComponent } from "react";
-import { useSelector } from "react-redux";
 
 interface ResultsFormProps {
   type: any;
+  formDataPerson: any;
+  formDataCompany: any;
 }
 
-const CheckForm: FunctionComponent<ResultsFormProps> = ({ type }) => {
-  const { formDataPerson, formDataCompany } = useSelector(
-    (state: any) => state.wizard
-  );
-
+const CheckForm: FunctionComponent<ResultsFormProps> = ({
+  type,
+  formDataPerson,
+  formDataCompany,
+}) => {
   return (
     <>
       {type === "company" && (
-        <section className="w-full max-h-[480px] h-full flex justify-start items-center flex-col">
+        <section className="w-full h-auto flex justify-start items-center flex-col">
           <article className="flex flex-col h-auto gap-4 rounded-lg p-4 justify-center items-center max-w-[480px]">
             <h1 className="text-lg text-gray-800">Confirme os dados abaixo:</h1>
             <p className="text-gray-500 text-sm">
@@ -37,7 +38,7 @@ const CheckForm: FunctionComponent<ResultsFormProps> = ({ type }) => {
       )}
 
       {type === "person" && (
-        <section className="w-full max-h-[480px] h-full flex justify-start items-center flex-col">
+        <section className="w-full h-auto flex justify-start items-center flex-col">
           <article className="flex flex-col h-auto gap-4 rounded-lg p-4 justify-center items-center max-w-[480px]">
             <h1 className="text-lg text-gray-800">Confirme os dados abaixo:</h1>
             <p className="text-gray-500 text-sm">

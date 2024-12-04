@@ -4,13 +4,7 @@ import DataTable from "./DataTable";
 
 const ResultList = () => {
   const [activeTab, setActiveTab] = useState("person");
-
-  const [results, setResults] = useState<any>([
-    {
-      persons: [],
-      companies: [],
-    },
-  ]);
+  const [person, setPerson] = useState<any>([]);
 
   const handleTabClick = (tab: any) => {
     setActiveTab(tab);
@@ -21,7 +15,7 @@ const ResultList = () => {
       const response = await axios.get(
         "http://localhost:5000/credit-score/list"
       );
-      setResults(response.data);
+      setPerson(response.data);
     } catch (err) {
       console.error("Erro na requisição:", err);
     }
@@ -32,7 +26,7 @@ const ResultList = () => {
   }, []);
 
   return (
-    <div className="container mx-auto max-w-[480px] h-auto">
+    <div className="container mx-auto max-w-[480px] w-full h-auto">
       <div className="flex justify-center border-b h-auto px-2">
         <button
           onClick={() => handleTabClick("person")}
@@ -56,20 +50,17 @@ const ResultList = () => {
         </button>
       </div>
 
-      <div className="content mt-4">
-        {activeTab === "person" && (
-          <div className="p-4 h-auto">
-            <DataTable results={results} />
-          </div>
-        )}
+      {activeTab === "person" && (
+        <div className="p-4 h-auto">
+          <DataTable results={person.persons} type={"person"} />
+        </div>
+      )}
 
-        {activeTab === "company" && (
-          <div className="p-4">
-            <h2 className="text-xl font-bold">Dados da Pessoa Jurídica</h2>
-            <p>Formulário para Pessoa Jurídica será exibido aqui.</p>
-          </div>
-        )}
-      </div>
+      {activeTab === "company" && (
+        <div className="p-4 h-auto">
+          <DataTable results={person.companies} type={"company"} />
+        </div>
+      )}
     </div>
   );
 };

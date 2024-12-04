@@ -2,28 +2,41 @@ import { FunctionComponent } from "react";
 
 interface DataTableProps {
   results: any;
+  type: any;
 }
 
-const DataTable: FunctionComponent<DataTableProps> = ({ results }) => {
+const DataTable: FunctionComponent<DataTableProps> = ({ results, type }) => {
   return (
-    <div className="overflow-x-auto">
-      <table className="min-w-full table-auto border-collapse bg-white shadow-lg h-auto">
+    <div className="overflow-x-auto ">
+      <table className="max-w-[480px] border-collapse ">
         <thead>
           <tr className="bg-gray-200">
             <th className="px-4 py-2 border text-left">Nome</th>
-            <th className="px-4 py-2 border text-left">Idade</th>
+            {type === "person" && (
+              <th className="px-4 py-2 border text-left w-full">Idade</th>
+            )}
+            {type === "company" && <></>}
+
             <th className="px-4 py-2 border text-left">Renda</th>
             <th className="px-4 py-2 border text-left">Cidade</th>
           </tr>
         </thead>
 
         <tbody>
-          {results?.persons?.map((item: any, index: any) => (
+          {results?.map((item: any, index: any) => (
             <tr key={index} className="border-b hover:bg-gray-100">
-              <td className="px-4 py-2 border">{item.person.name}</td>
-              <td className="px-4 py-2 border">{item.person.age}</td>
-              <td className="px-4 py-2 border">{item.person.income}</td>
-              <td className="px-4 py-2 border">{item.person.city}</td>
+              <td className="border px-2">
+                {item?.person?.name || item.company?.name}
+              </td>
+              {type === "person" && (
+                <td className="border px-2">{item?.person?.age}</td>
+              )}
+              <td className="border px-2">
+                {item?.person?.income || item?.company?.revenue}
+              </td>
+              <td className="px-4 py-2 border w-96">
+                {item?.person?.city || item?.company?.city}
+              </td>
             </tr>
           ))}
         </tbody>
