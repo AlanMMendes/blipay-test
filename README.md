@@ -36,7 +36,7 @@ O projeto está dividido em duas pastas principais:
    npm run dev
    ```
 
-   Isso iniciará o servidor de desenvolvimento do front-end. O cliente estará disponível em `http://localhost:3000` ou outro endereço especificado no terminal.
+   Isso iniciará o servidor de desenvolvimento do front-end. O cliente estará disponível em `http://localhost:5173` ou outro endereço especificado no terminal.
 
 ### Rodando os Testes no Client
 
