@@ -4,9 +4,13 @@ import { RiCloseLargeFill } from "react-icons/ri";
 
 interface ResultFormProps {
   status: any;
+  max_amount: any;
 }
 
-const ResultForm: FunctionComponent<ResultFormProps> = ({ status }) => {
+const ResultForm: FunctionComponent<ResultFormProps> = ({
+  status,
+  max_amount,
+}) => {
   return (
     <section className="flex justify-center items-center flex-col w-full h-auto p-10">
       <article className="w-full h-auto flex justify-start items-start flex-col">
@@ -40,7 +44,9 @@ const ResultForm: FunctionComponent<ResultFormProps> = ({ status }) => {
           >
             <FaCheck className="max-w-32 text-green-500" />
             <h1 className="text-lg text-center text-gray-800">
-              Obrigado por sua contribuição, seu crédito foi aprovado!
+              Obrigado por sua contribuição, seu crédito foi aprovado!, o valor
+              máximo de crédito é de
+              <span className="text-green-500 text-4xl"> R$ {max_amount}</span>
             </h1>
           </div>
         )}

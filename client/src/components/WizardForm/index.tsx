@@ -17,9 +17,8 @@ const WizardForm: React.FC = () => {
   const { type } = useParams();
   const navigate = useNavigate();
   const dispatch = useDispatch<AppDispatch>();
-  const { currentStep, formDataPerson, formDataCompany, status } = useSelector(
-    (state: any) => state.wizard
-  );
+  const { currentStep, formDataPerson, formDataCompany, status, max_amount } =
+    useSelector((state: any) => state.wizard);
 
   const handlePrev = () => {
     dispatch(prevStep());
@@ -64,9 +63,17 @@ const WizardForm: React.FC = () => {
         dataResponse?.statusCompany?.status === "APPROVED" ||
         dataResponse?.statusPerson?.status === "APPROVED"
       ) {
-        dispatch(setStatus({ status: "success" }));
+        dispatch(
+          setStatus({
+            status: "success",
+            max_amount:
+              type === "person"
+                ? dataResponse.statusPerson.max_amount
+                : dataResponse.statusCompany.max_amount,
+          })
+        );
       } else {
-        dispatch(setStatus({ status: "denied" }));
+        dispatch(setStatus({ status: "denied", max_amount: 0 }));
       }
     } catch (err) {
       console.error("Erro na requisição:", err);
@@ -82,6 +89,7 @@ const WizardForm: React.FC = () => {
         formDataCompany={formDataCompany}
         formDataPerson={formDataPerson}
         status={status}
+        max_amount={max_amount}
       />
 
       <nav className="flex flex-row gap-4 justify-center items-center h-auto">

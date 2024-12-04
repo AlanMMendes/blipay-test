@@ -60,7 +60,7 @@ app.post("/credit-score/results", (req, res) => {
           person.credit_result = {};
         }
 
-        person.credit_result.status = statusPerson;
+        person.credit_result = statusPerson;
         dbData.persons.push(person);
 
         return res.status(200).json({

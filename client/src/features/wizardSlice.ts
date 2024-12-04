@@ -4,6 +4,7 @@ interface WizardState {
   currentStep: number;
   maxSteps: number;
   status: "pending" | "success" | "denied";
+  max_amount: number;
   formDataPerson: {
     income: string;
     city: string;
@@ -23,6 +24,7 @@ const initialState: WizardState = {
   currentStep: 1,
   maxSteps: 3,
   status: "pending",
+  max_amount: 0,
   formDataPerson: {
     income: "",
     city: "",
@@ -52,10 +54,13 @@ const wizardSlice = createSlice({
       state,
       action: PayloadAction<{
         status: "pending" | "success" | "denied";
+        max_amount: number;
       }>
     ) => {
       state.status = action.payload.status;
+      state.max_amount = action.payload.max_amount;
     },
+
     setFormDataPerson: (
       state,
       action: PayloadAction<{

@@ -26,7 +26,7 @@ const ResultList = () => {
   }, []);
 
   return (
-    <div className="container mx-auto max-w-[480px] w-full h-auto">
+    <div className="container mx-auto max-w-[1280px] w-full h-auto flex flex-col">
       <div className="flex justify-center border-b h-auto px-2">
         <button
           onClick={() => handleTabClick("person")}
@@ -51,7 +51,7 @@ const ResultList = () => {
       </div>
 
       {activeTab === "person" && (
-        <div className="p-4 h-auto">
+        <div className="p-4 h-auto flex justify-center items-center">
           <DataTable results={person.persons} type={"person"} />
         </div>
       )}

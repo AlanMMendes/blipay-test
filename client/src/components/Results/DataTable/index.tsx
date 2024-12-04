@@ -7,7 +7,7 @@ interface DataTableProps {
 
 const DataTable: FunctionComponent<DataTableProps> = ({ results, type }) => {
   return (
-    <div className="overflow-x-auto ">
+    <div className="overflow-x-auto flex justify-center items-center">
       <table className="max-w-[480px] border-collapse ">
         <thead>
           <tr className="bg-gray-200">
@@ -19,6 +19,8 @@ const DataTable: FunctionComponent<DataTableProps> = ({ results, type }) => {
 
             <th className="px-4 py-2 border text-left">Renda</th>
             <th className="px-4 py-2 border text-left">Cidade</th>
+            <th className="px-4 py-2 border text-left">Status</th>
+            <th className="px-4 py-2 border text-left">Crédito Aprovado</th>
           </tr>
         </thead>
 
@@ -32,10 +34,16 @@ const DataTable: FunctionComponent<DataTableProps> = ({ results, type }) => {
                 <td className="border px-2">{item?.person?.age}</td>
               )}
               <td className="border px-2">
-                {item?.person?.income || item?.company?.revenue}
+                R$ {item?.person?.income || item?.company?.revenue}
               </td>
               <td className="px-4 py-2 border w-96">
                 {item?.person?.city || item?.company?.city}
+              </td>
+              <td className="px-4 py-2 border w-96">
+                {item?.credit_result?.status}
+              </td>
+              <td className="px-4 py-2 border w-96">
+                R$ {item?.credit_result?.max_amount}
               </td>
             </tr>
           ))}

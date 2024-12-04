@@ -53,8 +53,6 @@ const FormPerson: React.FC = () => {
 
     if (validateForm()) {
       dispatch(nextStep());
-    } else {
-      console.log("Erro no formulário. Corrija os campos.");
     }
   };
 

@@ -10,6 +10,7 @@ interface StepsProps {
   formDataCompany: any;
   status: any;
   currentStep: any;
+  max_amount: any;
 }
 
 const StepsForm: FunctionComponent<StepsProps> = ({
@@ -18,6 +19,7 @@ const StepsForm: FunctionComponent<StepsProps> = ({
   formDataCompany,
   status,
   currentStep,
+  max_amount,
 }) => {
   const renderStep = () => {
     switch (currentStep) {
@@ -37,7 +39,7 @@ const StepsForm: FunctionComponent<StepsProps> = ({
           />
         );
       case 3:
-        return <ResultForm status={status} />;
+        return <ResultForm status={status} max_amount={max_amount} />;
       default:
         return <h2>Passo Desconhecido</h2>;
     }
